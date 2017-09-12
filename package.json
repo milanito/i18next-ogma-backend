@@ -1,6 +1,6 @@
 {
   "name": "i18next-ogma-backend",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "This is a i18next plugin backend",
   "main": "dist/i18next-ogma-backend.js",
   "author": "Matthieu Rondeau <matt@matthieurondeau.fr>",
@@ -40,9 +40,7 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
-    "bluebird": "^3.5.0",
-    "lodash": "^4.17.4",
-    "moment": "^2.18.1"
+    "lodash": "^4.17.4"
   },
   "babel": {
     "presets": [
