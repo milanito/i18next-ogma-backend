@@ -1,6 +1,6 @@
 {
   "name": "i18next-ogma-backend",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "This is a i18next plugin backend",
   "main": "dist/i18next-ogma-backend.js",
   "author": "Matthieu Rondeau <matt@matthieurondeau.fr>",
