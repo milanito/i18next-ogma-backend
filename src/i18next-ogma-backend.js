@@ -1,5 +1,5 @@
-import request from 'request-promise';
-import { clone, extend, join, get, merge, forEach, set } from 'lodash';
+import axios from 'axios';
+import { clone, extend, join, get, merge } from 'lodash';
 
 import { auth, tokenPath, translationPath } from './config';
 
@@ -43,26 +43,19 @@ class Backend {
    */
   read(lang, ns, cb) {
     const { url, id, token } = this.options;
-    return request.post({
-      url: join([url, tokenPath], ''),
-      rejectUnauthorized: false,
-      form: merge(auth, { id, token }),
-      json: true
-    })
-    .then(payload => get(payload, 'token', ''))
-    .then(token =>
-      request.get({
-        url: join([
+    return axios.post(join([url, tokenPath], ''),
+      merge(auth, { id, token }))
+      .then(({ data }) => get(data, 'token', ''))
+      .then(tkn =>
+        axios.get(join([
           url, translationPath.replace('{{locale}}', lang)
-        ], ''),
-        rejectUnauthorized: false,
-        headers: {
-          Authorization: `Bearer ${token}`
-        },
-        json: true
-      }))
-    .then(translations => cb(null, translations))
-    .catch(err => cb(err));
+        ], ''), {
+          headers: {
+            Authorization: `Bearer ${tkn}`
+          },
+        }))
+      .then(({ data }) => cb(null, data))
+      .catch(err => cb(err));
   }
 
   // eslint-disable-next-line
